@@ -32,6 +32,7 @@ alias sd='cd "$(find . -type d 2>/dev/null | fzf)"'
 alias sf='cd "$(dirname "$(find . -type f | fzf)")"'
 alias wayreload='pkill -SIGUSR2 waybar'
 alias wallreload='pkill hyprpaper && systemctl --user restart hyprpaper'
+alias vim='nvim'
 
 # PATH
 export PATH="$HOME/.cargo/bin:$PATH"
