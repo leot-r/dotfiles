@@ -29,3 +29,10 @@ vim.keymap.set("i", "<C-c>", "<Esc>")
 vim.keymap.set("n", "<leader>y", "\"+y")
 vim.keymap.set("v", "<leader>y", "\"+y")
 vim.keymap.set("n", "<leader>Y", "\"+Y")
+
+vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, {
+  noremap = true,
+  silent = true,
+  desc = "LSP Rename Symbol"
+})
+

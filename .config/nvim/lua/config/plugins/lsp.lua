@@ -9,7 +9,17 @@ return {
         "mason-org/mason-lspconfig.nvim",
         config = function()
             require("mason-lspconfig").setup({
-                ensure_installed = { "lua_ls", "pyright", "tsserver", "html", "cssls", "jsonls", "bashls", } -- Add golang
+                ensure_installed = {
+                    "lua_ls",
+                    "pyright",
+                    -- "tsserver",
+                    "html",
+                    "cssls",
+                    "jsonls",
+                    "bashls",
+                    "yamlls",
+                    "gopls",
+                } -- Add golang
             })
         end
     },
@@ -60,6 +70,24 @@ return {
                 capabilities = capabilities,
                 on_attach = on_attach,
                 filetypes = { "python" },
+            })
+            lspconfig.yamlls.setup({
+                capabilities = capabilities,
+                on_attach = on_attach,
+                settings = {
+                    yaml = {
+                        schemas = {
+                            -- Example schemas
+                            ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+                            ["https://json.schemastore.org/kubernetes.json"] = "/*.k8s.yaml",
+                            -- Add more as needed
+                        },
+                        validate = true,
+                        format = { enable = true },
+                        hover = true,
+                        completion = true,
+                    },
+                },
             })
         end
     }
