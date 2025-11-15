@@ -33,9 +33,14 @@ alias sf='cd "$(dirname "$(find . -type f | fzf)")"'
 alias wayreload='pkill -SIGUSR2 waybar'
 alias wallreload='pkill hyprpaper && systemctl --user restart hyprpaper'
 alias vim='nvim'
+zipf() {
+    zip -r9q "$1.zip" "$1"
+}
+
 
 # PATH
 export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$PATH:/usr/local/go/bin:$HOME/go/bin"
 
 #for starship -Terminal prompt
 eval "$(starship init bash)"

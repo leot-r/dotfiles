@@ -9,7 +9,7 @@ return {
             enable_check_bracket_line = false,
         })
 
-        npairs.remove_rule('(')
-        npairs.remove_rule('[')
+        -- npairs.remove_rule('(')
+        -- npairs.remove_rule('[')
     end,
 }

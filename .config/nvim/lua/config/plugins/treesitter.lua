@@ -16,6 +16,7 @@ return {
 				"json",
 				"markdown",
 				"markdown_inline",
+                "go",
 			},
 			auto_install = true,
 			highlight = {
