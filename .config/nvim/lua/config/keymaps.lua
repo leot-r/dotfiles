@@ -1,4 +1,3 @@
-
 -- Telescope bindings / General navigation
 vim.keymap.set("n", "<leader>sa", vim.cmd.Ex)
 
@@ -6,7 +5,7 @@ local builtin = require("telescope.builtin")
 vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = 'Telescope find files' })
 vim.keymap.set('n', '<leader>sg', builtin.git_files, { desc = 'Git file serch' })
 vim.keymap.set('n', '<leader>st', function()
-	builtin.grep_string({ search = vim.fn.input("Grep > ") });
+    builtin.grep_string({ search = vim.fn.input("Grep > ") });
 end)
 
 -- Undotree
@@ -31,8 +30,7 @@ vim.keymap.set("v", "<leader>y", "\"+y")
 vim.keymap.set("n", "<leader>Y", "\"+Y")
 
 vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, {
-  noremap = true,
-  silent = true,
-  desc = "LSP Rename Symbol"
+    noremap = true,
+    silent = true,
+    desc = "LSP Rename Symbol"
 })
-

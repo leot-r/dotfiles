@@ -1,11 +1,16 @@
 return {
-	"nvim-treesitter/nvim-treesitter",
-	branch = 'master',
-	lazy = false,
-	build = ":TSUpdate",
-	config = function()
-		require("nvim-treesitter.configs").setup({
-			ensure_installed = {
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    event = { "BufReadPre", "BufNewFile" }, -- Load when opening an exising file
+    config = function()
+        local treesitter = require("nvim-treesitter.configs")
+
+        treesitter.setup({
+            highlight = {
+                enable = true,
+            },
+            indent = { enable = true },
+            ensure_installed = {
 				"lua",
 				"bash",
 				"python",
@@ -18,14 +23,7 @@ return {
 				"markdown_inline",
                 "go",
 			},
-			auto_install = true,
-			highlight = {
-				enable = true,
-	 		},
-            indent = {
-                enable = true,
-                disable = { "python" },
-            },
-		})
-	end
+        })
+
+    end
 }

@@ -1,4 +1,3 @@
--- :checkhealth vim.lsp
 return {
     {
         "mason-org/mason.nvim",
@@ -27,7 +26,10 @@ return {
     {
         "neovim/nvim-lspconfig",
         config = function()
-            local lspconfig = require("lspconfig")
+            local capabilities = require('blink.cmp').get_lsp_capabilities()
+            local lspconfig = vim.lsp.config()
+
+            -- Do things when we connect to an lsp
             local on_attach = function(client, bufnr)
                 local opts = { noremap = true, silent = true, buffer = bufnr }
 
@@ -35,7 +37,7 @@ return {
                 -- vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
                 vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts) --Jump to implementation
                 vim.keymap.set("n", "gr", vim.lsp.buf.references, opts) --Jump to references
-                vim.keymap.set("n", "K", vim.lsp.buf.hover, opts) -- Show the err
+                vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
                 vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
                 vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts) --Rename var
                 -- vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
@@ -43,18 +45,14 @@ return {
                 -- vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
                 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, opts)
                 -- vim.keymap.set("n", "<leader>f", function()
-                -- vim.lsp.buf.format { async = true }
+                    -- vim.lsp.buf.format { async = true }
                 -- end, opts)
             end
 
-            -- Capabilities (compleation) (combine regualar and blink.cmp capabilities)
-            local capabilities = vim.lsp.protocol.make_client_capabilities()
-            capabilities = vim.tbl_deep_extend('force', capabilities, require('blink.cmp').get_lsp_capabilities({}, false))
-
-
-            -- Diagnostics
+            -- Setup diagnostics
             vim.diagnostic.config({
                 virtual_text = {
+                    spacing = 4,
                     prefix = "●",
                 },
                 signs = true,
@@ -63,48 +61,40 @@ return {
                 severity_sort = true,
             })
 
-            --===================== Language server config =============================--
+            -- Setup lsp servers
             lspconfig.lua_ls.setup({
-                on_attach = on_attach,
                 capabilities = capabilities,
-                -- settings = {
-                    -- Lua {
-                        -- diagnostics = { globals = { "vim" }},
-                        -- workspace = {
-                            -- library = vim.api.nvim_get_runtime_file("", true),
-                            -- checkThirdParty = false,
-                        -- },
-                    -- },
-                -- },
+                on_attach = on_attach
             })
             lspconfig.pyright.setup({
-                on_attach = on_attach,
                 capabilities = capabilities,
-            })
-            lspconfig.html.setup({
                 on_attach = on_attach,
-                capabilities = capabilities,
-            })
-            lspconfig.cssls.setup({
-                on_attach = on_attach,
-                capabilities = capabilities,
-            })
-            lspconfig.jsonls.setup({
-                on_attach = on_attach,
-                capabilities = capabilities,
-            })
-            lspconfig.bashls.setup({
-                on_attach = on_attach,
-                capabilities = capabilities,
+                filetypes = { "python" },
             })
             lspconfig.yamlls.setup({
-                on_attach = on_attach,
                 capabilities = capabilities,
-            })
-            lspconfig.gopls.setup({
                 on_attach = on_attach,
-                capabilities = capabilities,
+                settings = {
+                    yaml = {
+                        schemas = {
+                            -- Example schemas
+                            ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+                            ["https://json.schemastore.org/kubernetes.json"] = "/*.k8s.yaml",
+                            -- Add more as needed
+                        },
+                        validate = true,
+                        format = { enable = true },
+                        hover = true,
+                        completion = true,
+                    },
+                },
             })
-        end,
+            lspconfig.html.setup {}
+            lspconfig.cssls.setup {}
+            lspconfig.jsonls.setup {}
+            lspconfig.bashls.setup {}
+            lspconfig.gopls.setup {}
+        end
     }
 }
+

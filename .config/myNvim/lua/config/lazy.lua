@@ -23,5 +23,7 @@ vim.g.maplocalleader = "\\"
 
 -- Setup lazy.nvim
 require("lazy").setup({
+	{ "nvim-treesitter/playground" },
+	{ "mbbill/undotree" },
 	{ import = "config.plugins" },
 })

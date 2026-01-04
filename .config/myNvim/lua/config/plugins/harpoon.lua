@@ -17,3 +17,4 @@ return {
         { "<leader>4", "<cmd>lua require('harpoon.ui').nav_file(4)<cr>", desc = "Go to file 4" },
     },
 }
+
