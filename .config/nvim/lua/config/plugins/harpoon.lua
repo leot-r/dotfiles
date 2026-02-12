@@ -15,5 +15,6 @@ return {
         { "<leader>2", "<cmd>lua require('harpoon.ui').nav_file(2)<cr>", desc = "Go to file 2" },
         { "<leader>3", "<cmd>lua require('harpoon.ui').nav_file(3)<cr>", desc = "Go to file 3" },
         { "<leader>4", "<cmd>lua require('harpoon.ui').nav_file(4)<cr>", desc = "Go to file 4" },
+        { "<leader>5", "<cmd>lua require('harpoon.ui').nav_file(5)<cr>", desc = "Go to file 5" },
     },
 }

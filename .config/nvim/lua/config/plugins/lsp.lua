@@ -13,6 +13,7 @@ return {
                 ensure_installed = {
                     "lua_ls",
                     "pyright",
+                    "vtsls",
                     -- "tsserver",
                     "html",
                     "cssls",
@@ -20,6 +21,7 @@ return {
                     "bashls",
                     "yamlls",
                     "gopls",
+                    "rust_analyzer",
                 }
             })
         end
@@ -31,20 +33,20 @@ return {
             local on_attach = function(client, bufnr)
                 local opts = { noremap = true, silent = true, buffer = bufnr }
 
-                vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts) --Jump to definition
-                -- vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-                vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts) --Jump to implementation
-                vim.keymap.set("n", "gr", vim.lsp.buf.references, opts) --Jump to references
-                vim.keymap.set("n", "K", vim.lsp.buf.hover, opts) -- Show the err
-                vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
+                vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, opts) --Jump to definition
+                vim.keymap.set("n", "<leader>gi", vim.lsp.buf.implementation, opts) --Jump to implementation
+                vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, opts) --Jump to references
                 vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts) --Rename var
+                -- vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
                 -- vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
                 -- vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
                 -- vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
-                vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, opts)
                 -- vim.keymap.set("n", "<leader>f", function()
                 -- vim.lsp.buf.format { async = true }
                 -- end, opts)
+                vim.keymap.set("n", "K", vim.lsp.buf.hover, opts) -- Show the err
+                vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
+                vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, opts)
             end
 
             -- Capabilities (compleation) (combine regualar and blink.cmp capabilities)
@@ -105,6 +107,10 @@ return {
                 on_attach = on_attach,
                 capabilities = capabilities,
             })
+            -- lspconfig.rust_analyzer.setup({
+            --     on_attach = on_attach,
+            --     capabilities = capabilities
+            -- })
         end,
     }
 }

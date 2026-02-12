@@ -38,3 +38,6 @@ vim.opt.signcolumn = "yes"
 
 -- Update time?
 vim.opt.updatetime = 50
+
+-- Cursor
+vim.opt.guicursor = "i:block"

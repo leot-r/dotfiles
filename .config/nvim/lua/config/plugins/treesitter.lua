@@ -8,6 +8,7 @@ return {
         treesitter.setup({
             highlight = {
                 enable = true,
+                --enable = false,
             },
             indent = { enable = true },
             ensure_installed = {
@@ -22,6 +23,7 @@ return {
 				"markdown",
 				"markdown_inline",
                 "go",
+                "rust",
 			},
         })
 
