@@ -1,7 +1,7 @@
 # .bashrc
 
 #custom
-fastfetch
+#fastfetch
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
@@ -41,6 +41,3 @@ zipf() {
 # PATH
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$PATH:/usr/local/go/bin:$HOME/go/bin"
-
-#for starship -Terminal prompt
-eval "$(starship init bash)"
